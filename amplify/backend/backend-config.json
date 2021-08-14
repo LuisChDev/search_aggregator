@@ -1,0 +1,16 @@
+{
+  "function": {
+    "APIcall": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2021-08-14T20:23:25.946Z"
+    }
+  }
+}
