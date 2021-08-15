@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/search",
+      "lambdaFunction": "APIcall",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/search"
+    }
+  ],
+  "resourceName": "APIcallAPI",
+  "apiName": "APIcallAPI",
+  "functionArns": [
+    {
+      "lambdaFunction": "APIcall"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-searchaggregator-dev-150546-authRole",
+    "unAuthRoleName": "amplify-searchaggregator-dev-150546-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "APIcall",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

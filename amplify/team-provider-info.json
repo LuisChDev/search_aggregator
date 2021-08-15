@@ -1,23 +1,29 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-searchaggregator-dev-150546-authRole",
-            "UnauthRoleArn": "arn:aws:iam::022970387508:role/amplify-searchaggregator-dev-150546-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::022970387508:role/amplify-searchaggregator-dev-150546-authRole",
-            "Region": "us-east-2",
-            "DeploymentBucketName": "amplify-searchaggregator-dev-150546-deployment",
-            "UnauthRoleName": "amplify-searchaggregator-dev-150546-unauthRole",
-            "StackName": "amplify-searchaggregator-dev-150546",
-            "StackId": "arn:aws:cloudformation:us-east-2:022970387508:stack/amplify-searchaggregator-dev-150546/059e72a0-fd3b-11eb-9b97-02158828fb18",
-            "AmplifyAppId": "d1uczlq4niovec"
-        },
-        "categories": {
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d1uczlq4niovec",
-                    "type": "cicd"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-searchaggregator-dev-150546-authRole",
+      "UnauthRoleArn": "arn:aws:iam::022970387508:role/amplify-searchaggregator-dev-150546-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::022970387508:role/amplify-searchaggregator-dev-150546-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-searchaggregator-dev-150546-deployment",
+      "UnauthRoleName": "amplify-searchaggregator-dev-150546-unauthRole",
+      "StackName": "amplify-searchaggregator-dev-150546",
+      "StackId": "arn:aws:cloudformation:us-east-2:022970387508:stack/amplify-searchaggregator-dev-150546/059e72a0-fd3b-11eb-9b97-02158828fb18",
+      "AmplifyAppId": "d1uczlq4niovec"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1uczlq4niovec",
+          "type": "cicd"
         }
+      },
+      "function": {
+        "APIcall": {
+          "deploymentBucketName": "amplify-searchaggregator-dev-150546-deployment",
+          "s3Key": "amplify-builds/APIcall-69596c6779586f354b63-build.zip"
+        }
+      }
     }
+  }
 }

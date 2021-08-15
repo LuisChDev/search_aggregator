@@ -12,5 +12,21 @@
       "type": "cicd",
       "lastPushTimeStamp": "2021-08-14T20:23:25.946Z"
     }
+  },
+  "api": {
+    "APIcallAPI": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "APIcall",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
   }
 }

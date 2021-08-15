@@ -40,6 +40,11 @@ app.get("/item/*", function (req, res) {
  * Example post method *
  ****************************/
 
+app.post("/search", (req, res) => {
+  const schstr = req.body.search;
+  res.json({ success: "successful search", result: schstr});
+});
+
 app.post("/item", function (req, res) {
   // Add your code here
   res.json({ success: "post call succeed!", url: req.url, body: req.body });
