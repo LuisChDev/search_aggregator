@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Card, Form, Button, Alert, Container } from "react-bootstrap";
+import { Dropdown, Card, Form, Button, Alert, Container } from "react-bootstrap";
 import { API } from "aws-amplify";
 import { addBing, addGoogle, clear } from "../redux/ResultsSlice";
 import { useDispatch } from "react-redux";
@@ -64,26 +64,51 @@ const SearchBox = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId="searchEngine">
-            {["google", "bing", "Both"].map((engine) => (
-              <Form.Check
-                inline
-                key={`${engine} radio button`}
-                name="searchEngine"
-                type="radio"
-                label={engine}
-                value={engine}
-                onChange={props.handleChange}
-              />
-            ))}
+          <Form.Group controlId="searchEngine" className="inline-buttons">
+            <Dropdown>
+              <Dropdown.Toggle variant="info">
+                {props.values.searchEngine}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {["google", "bing", "Both"].map((engine) => (
+                  <Dropdown.Item>
+                    <Form.Check
+                      inline
+                      key={`${engine} radio button`}
+                      name="searchEngine"
+                      type="radio"
+                      label={engine}
+                      value={engine}
+                      onChange={props.handleChange}
+                    />
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+
+            </Dropdown>
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          {/* <Form.Group controlId="searchEngine"> */}
+          {/*   {["google", "bing", "Both"].map((engine) => ( */}
+          {/*     <Form.Check */}
+          {/*       inline */}
+          {/*       key={`${engine} radio button`} */}
+          {/*       name="searchEngine" */}
+          {/*       type="radio" */}
+          {/*       label={engine} */}
+          {/*       value={engine} */}
+          {/*       onChange={props.handleChange} */}
+          {/*     /> */}
+          {/*   ))} */}
+          {/* </Form.Group> */}
+
+          <Button variant="primary" type="submit" className="inline-buttons">
             {`Search using ${props.values.searchEngine}`}
           </Button>
 
           {Object.keys(props.errors).length !== 0 ? (
-            <Alert variant="danger">
+            <Alert className="form-warning" variant="danger">
               {props.errors.searchEngine || props.errors.searchText}
             </Alert>
           ) : (

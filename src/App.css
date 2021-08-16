@@ -10,3 +10,12 @@ section.card {
     margin: 20px;
     padding: 20px;
 }
+
+.form-warning {
+    margin: 20px 0;
+}
+
+.inline-buttons {
+    display: inline-block;
+    margin: 10px 5px;
+}
