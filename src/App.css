@@ -2,6 +2,10 @@
     min-height: 100vh;
 }
 
+.app-header {
+    margin: 20px;
+}
+
 section.card {
     margin: 20px;
     padding: 20px;

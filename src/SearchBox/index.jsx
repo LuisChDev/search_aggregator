@@ -1,58 +1,97 @@
-import { useFormik } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Form, Button, Alert, Container } from "react-bootstrap";
+import { Card, Form, Button, Alert, Container } from "react-bootstrap";
+import { API } from "aws-amplify";
+import { addBing, addGoogle, clear } from "../redux/ResultsSlice";
+import { useDispatch } from "react-redux";
 
-
+const searchSchema = Yup.object().shape({
+  searchText: Yup.string()
+    .required()
+    .min(4, "type at least 4 characters")
+    .max(50, "type at most 50 characters"),
+  searchEngine: Yup.mixed().required().oneOf(["google", "bing", "Both"]),
+});
 
 const SearchBox = () => {
-
-  const formik = useFormik({
-    initialValues: {
-      searchText: "",
-      searchEngine: "",
-    },
-
-    onSubmit: async (vals) => {
-      await new Promise((r) => setTimeout(r, 2000));
-      if (!vals) {
-        alert("no values selected");
-      } else {
-        alert(JSON.stringify(vals));
-      }
-    },
-  });
+  const dispatch = useDispatch();
 
   return (
-    <Form onSubmit={formik.handleSubmit}>
-      <Form.Group controlId="searchText">
-        <Form.Label>Search</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Search text"
-          onChange={formik.handleChange}
-          value={formik.values.searchText}
-        />
-      </Form.Group>
+    <Formik
+      initialValues={{
+        searchText: "",
+        searchEngine: "",
+      }}
+      validationSchema={searchSchema}
+      onSubmit={async (vals) => {
 
-      <Form.Group controlId="searchEngine">
-        {["Google", "Bing", "Both"].map((engine) => (
-          <Form.Check
-            inline
-            key={`${engine} radio button`}
-            name="searchEngine"
-            type="radio"
-            label={engine}
-            value={engine}
-            onChange={formik.handleChange}
-          />
-        ))}
-      </Form.Group>
+        // clear previous value
+        dispatch(clear());
 
-      <Button variant="primary" type="submit">
-        {`Search using ${formik.values.searchEngine}`}
-      </Button>
-    </Form>
+        const resp = await API.post("APIcallAPI", "/search", {
+          body: {
+            search: vals.searchText,
+            engine: vals.searchEngine,
+          },
+        });
+
+        if (vals.searchEngine === "Both") {
+          console.log(resp);
+          dispatch(addBing(resp.search_result.bing));
+          dispatch(addGoogle(resp.search_result.google)
+          );
+        } else {
+          if (vals.searchEngine === "google") {
+            console.log(resp);
+            dispatch(addGoogle(resp.search_result));
+          } else {
+            console.log(resp);
+            dispatch(addBing(resp.search_result));
+          }
+        }
+      }}
+    >
+      {(props) => (
+        <Form onSubmit={props.handleSubmit}>
+          <Form.Group controlId="searchText">
+            <Form.Label>Search</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Search text"
+              onChange={props.handleChange}
+              value={props.values.searchText}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="searchEngine">
+            {["google", "bing", "Both"].map((engine) => (
+              <Form.Check
+                inline
+                key={`${engine} radio button`}
+                name="searchEngine"
+                type="radio"
+                label={engine}
+                value={engine}
+                onChange={props.handleChange}
+              />
+            ))}
+          </Form.Group>
+
+          <Button variant="primary" type="submit">
+            {`Search using ${props.values.searchEngine}`}
+          </Button>
+
+          {Object.keys(props.errors).length !== 0 ? (
+            <Alert variant="danger">
+              {props.errors.searchEngine || props.errors.searchText}
+            </Alert>
+          ) : (
+            ""
+          )}
+        </Form>
+      )}
+    </Formik>
   );
 };
 

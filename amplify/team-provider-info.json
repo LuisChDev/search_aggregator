@@ -21,7 +21,7 @@
       "function": {
         "APIcall": {
           "deploymentBucketName": "amplify-searchaggregator-dev-150546-deployment",
-          "s3Key": "amplify-builds/APIcall-69596c6779586f354b63-build.zip"
+          "s3Key": "amplify-builds/APIcall-3854754152344d643654-build.zip"
         }
       }
     }
